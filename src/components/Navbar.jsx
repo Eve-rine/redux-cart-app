@@ -10,7 +10,9 @@ import {
 import { ShoppingCart as CartIcon } from '@mui/icons-material';
 
 function Navbar() {
-  const cartItemCount = useSelector(state => state.cart.items.reduce((total, item) => total + item.quantity, 0));
+  const cartItemCount = useSelector(state => 
+    state.cart.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   return (
     <AppBar position="static">

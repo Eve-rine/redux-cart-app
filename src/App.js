@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import store from './redux/store';
+import ProductList from './components/ProductsList';
+import Cart from './components/Cart';
+import Navbar from './components/Navbar';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <div style={{ display: 'flex', padding: '20px' }}>
+          <ProductList />
+          <Cart />
+        </div>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

@@ -16,7 +16,10 @@ import {
   Remove as RemoveIcon, 
   Delete as DeleteIcon 
 } from '@mui/icons-material';
-import { removeFromCart, updateQuantity } from '../redux/cartSlice';
+import { 
+  removeFromCart, 
+  updateQuantity 
+} from '../redux/actions/cartActions'
 
 function Cart() {
   const { items, total } = useSelector(state => state.cart);
@@ -24,12 +27,12 @@ function Cart() {
 
   const handleQuantityChange = (product, newQuantity) => {
     if (newQuantity >= 1) {
-      dispatch(updateQuantity({ id: product.id, quantity: newQuantity }));
+      dispatch(updateQuantity(product.id, newQuantity));
     }
   };
 
-  const handleRemove = (product) => {
-    dispatch(removeFromCart(product));
+  const handleRemove = (productId) => {
+    dispatch(removeFromCart(productId));
   };
 
   return (
@@ -48,7 +51,7 @@ function Cart() {
                 secondaryAction={
                   <IconButton 
                     edge="end" 
-                    onClick={() => handleRemove(product)}
+                    onClick={() => handleRemove(product.id)}
                   >
                     <DeleteIcon />
                   </IconButton>

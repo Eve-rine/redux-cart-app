@@ -9,7 +9,7 @@ import {
   Button, 
   CardActions 
 } from '@mui/material';
-import { addToCart } from '../redux/cartSlice';
+import { addToCart } from '../redux/actions/cartActions'
 
 function ProductList() {
   const products = useSelector(state => state.products.items);

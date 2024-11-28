@@ -12,6 +12,9 @@ import {
   const cartReducer = (state = initialState, action) => {
     switch (action.type) {
       case ADD_TO_CART: {
+        if (!action.payload || !action.payload.id || typeof action.payload.price !== 'number') {
+          return state; 
+        }
         const existingItemIndex = state.items.findIndex(
           item => item.id === action.payload.id
         );
@@ -44,6 +47,10 @@ import {
         const itemToRemove = state.items.find(
           item => item.id === action.payload
         );
+
+        if (!itemToRemove) {
+          return state;
+        }
   
         return {
           ...state,

@@ -18,7 +18,7 @@ function Navbar() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Shopping Cart Demo
+            Eve's Accessories Shop
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={cartItemCount} color="secondary">

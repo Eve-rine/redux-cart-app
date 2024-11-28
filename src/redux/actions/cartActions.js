@@ -14,7 +14,7 @@ import {
     payload: productId
   });
   
-  export const updateQuantity = (productId, quantity) => ({
+  export const updateQuantity = (id, quantity) => ({
     type: UPDATE_QUANTITY,
-    payload: { productId, quantity }
+    payload: { id, quantity }
   });

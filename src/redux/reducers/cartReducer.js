@@ -60,23 +60,31 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case UPDATE_QUANTITY: {
-
-      const itemToUpdateIndex = state.items.findIndex(item => item.id === action.payload.id);
-      if (itemToUpdateIndex === -1) {
-        return state;
-      }
-      const updatedItem = {
-        ...state.items[itemToUpdateIndex],
-        quantity: Math.max(0, action.payload.quantity),
-      };
+      
+    if (!action.payload || !action.payload.id || typeof action.payload.quantity !== 'number') {
+      return state;
+    }
+  
+    const { id, quantity } = action.payload;
+  
+    const existingItemIndex = state.items.findIndex(item => item.id === id);
+  
+    if (existingItemIndex > -1) {
       const updatedItems = [...state.items];
-      updatedItems[itemToUpdateIndex] = updatedItem;
+      updatedItems[existingItemIndex] = {
+        ...updatedItems[existingItemIndex],
+        quantity: Math.max(1, quantity)
+      };
+  
       return {
         ...state,
         items: updatedItems,
-        total: updatedItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        total: updatedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
       };
     }
+  
+    return state;
+  }
 
     default:
       return state;

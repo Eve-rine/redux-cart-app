@@ -85,21 +85,21 @@ describe('cartReducer', () => {
   });
 
   describe('UPDATE_QUANTITY', () => {
-    it('should update the quantity of an item', () => {
-      const state = {
-        items: [{ id: 1, name: 'Item 1', price: 100, quantity: 1 }],
-        total: 100
-      };
-      const action = {
-        type: UPDATE_QUANTITY,
-        payload: { productId: 1, quantity: 3 }
-      };
+    // it('should update the quantity of an item', () => {
+    //   const state = {
+    //     items: [{ id: 1, name: 'Item 1', price: 100, quantity: 1 }],
+    //     total: 100
+    //   };
+    //   const action = {
+    //     type: UPDATE_QUANTITY,
+    //     payload: { productId: 1, quantity: 3 }
+    //   };
 
-      const result = cartReducer(state, action);
+    //   const result = cartReducer(state, action);
 
-      expect(result.items[0].quantity).toBe(3);
-      expect(result.total).toBe(300);
-    });
+    //   expect(result.items[0].quantity).toBe(3);
+    //   expect(result.total).toBe(300);
+    // });
 
     it('should not update the quantity to a negative value', () => {
       const state = {
@@ -116,22 +116,31 @@ describe('cartReducer', () => {
       expect(result).toEqual(state);
     });
 
-    it('should recalculate the total after updating quantities', () => {
-      const state = {
-        items: [
-          { id: 1, name: 'Item 1', price: 100, quantity: 1 },
-          { id: 2, name: 'Item 2', price: 50, quantity: 2 }
-        ],
-        total: 200
-      };
-      const action = {
-        type: UPDATE_QUANTITY,
-        payload: { productId: 2, quantity: 1 }
-      };
-
-      const result = cartReducer(state, action);
-
-      expect(result.total).toBe(150);
-    });
+    it('should update the quantity of an item', () => {
+        const state = {
+          items: [{ id: 1, name: 'Item 1', price: 100, quantity: 1 }],
+          total: 100,
+        };
+        const action = { type: UPDATE_QUANTITY, payload: { id: 1, quantity: 3 } };
+        const result = cartReducer(state, action);
+      
+        expect(result.items[0].quantity).toBe(3); // Updated quantity
+        expect(result.total).toBe(300); // Updated total
+      });
+      
+      it('should recalculate the total after updating quantities', () => {
+        const state = {
+          items: [
+            { id: 1, name: 'Item 1', price: 100, quantity: 1 },
+            { id: 2, name: 'Item 2', price: 50, quantity: 2 },
+          ],
+          total: 200,
+        };
+        const action = { type: UPDATE_QUANTITY, payload: { id: 2, quantity: 1 } };
+        const result = cartReducer(state, action);
+      
+        expect(result.total).toBe(150); // Recalculated total
+      });
+      
   });
 });

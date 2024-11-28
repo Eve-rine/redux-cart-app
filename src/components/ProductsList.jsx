@@ -27,7 +27,7 @@ function ProductList() {
             <CardMedia
               component="img"
               height="200"
-              image={product.image}
+              image={`${process.env.PUBLIC_URL}${product.image}`}
               alt={product.name}
             />
             <CardContent>
